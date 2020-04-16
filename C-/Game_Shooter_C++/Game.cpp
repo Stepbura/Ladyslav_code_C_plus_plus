@@ -16,6 +16,8 @@ Game::~Game()
 void Game::initGame()
 {
 	createNewCharacter();
+	Weapon w1(2,5,"ddk",1,100,100,1);
+	std::cout << w1.toString() << std::endl;
 }
 
 

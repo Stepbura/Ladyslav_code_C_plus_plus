@@ -51,10 +51,10 @@ void Character::initialize(const std::string name)
 	this->dexterity = 5;
 	this->intelligence = 5;
 
-	this->hp = 10;
-	this->hpMax = 10;
-	this->stamina = 10;
-	this->staminaMax = 10;
+	this->hp = (this->vitality * 2) + (this->strength / 2);
+	this->hpMax = this->hpMax;
+	this->stamina = this->staminaMax;
+	this->staminaMax = this->vitality + (this->strength / 2) + (this->dexterity / 3);
 	this->damageMin = this->strength;
 	this->damageMax = this->strength + 2;
 	this->defence = this->dexterity + (this->intelligence / 2);
@@ -95,6 +95,9 @@ void Character::leveleUp()
 		this->exp -= this->expNext;
 		this->level++;
 		this->expNext = static_cast<int>((50 / 3) * ((pow(level, 3) - 6 * pow(level, 2)) + 17 * this->level - 12)) + 100;
+		
+		this->startPoints++;
+		this->skillPoints++;
 	}
 }
 
