@@ -21,6 +21,5 @@ std::string Armor::toString()
 
 Armor* Armor::clone() const
 {
-
 	return new Armor(*this);
 }

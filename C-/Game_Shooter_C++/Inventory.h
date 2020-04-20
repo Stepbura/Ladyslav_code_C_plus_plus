@@ -7,7 +7,10 @@ class Inventory
 {
 public:
 	Inventory();
-	virtual ~Inventory();
+	~Inventory();
+	Inventory(const Inventory& obj);
+	inline int size()const { return this->nOfItems; };
+	Item& operator[](const int index);
 
 	void addItem(const Item& item);
 	void removeItem(int index);
@@ -21,10 +24,8 @@ public:
 
 private:
 	void expand();
-	void initialize(const int from);
+	void initialize(const int from = 0);
 	int capacity;
 	int nOfItems;
 	Item** itemArr;
-
-
 };
