@@ -18,6 +18,7 @@ public:
 
 	//Functions
 	void mainMenu();
+	void Travel();
 	void initGame();
 	void createNewCharacter();
 	void saveCharacters();

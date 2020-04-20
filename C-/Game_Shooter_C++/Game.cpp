@@ -99,3 +99,9 @@ void Game::saveCharacters()
 
 	outFile.close();
 }
+
+
+void Game::Travel()
+{
+
+}
