@@ -5,6 +5,7 @@
 #include <ctime>
 #include <vector>
 #include <fstream>
+#include "Event.h"
 
 using namespace std;
 

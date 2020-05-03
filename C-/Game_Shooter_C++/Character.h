@@ -40,6 +40,9 @@ public:
 private:
 	double xPos, yPos;
 
+	int distanceTravelled;
+
+
 	Inventory inventory;
 	Weapon weapon;
 	Armor armor_head;
@@ -48,6 +51,7 @@ private:
 	Armor armor_legs;
 
 
+	int gold;
 	std::string name;
 	int level;
 	int exp;

@@ -16,6 +16,8 @@ Game::~Game()
 void Game::initGame()
 {
 	createNewCharacter();
+	Puzzle p("lel.txt");
+	std::cout << p.getAsString() << "\n";
 }
 
 //Functions 
