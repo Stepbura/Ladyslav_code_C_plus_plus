@@ -4,8 +4,7 @@
 Puzzle::Puzzle(std::string fileName)
 {
 
-	this->correctAnswers = 0;
-	
+	this->correctAnswers = 0;	
 	std::ifstream inFile(fileName);
 
 	std::string answer = "";
@@ -46,8 +45,11 @@ std::string Puzzle::getAsString()
 
 	for (rsize_t i = 0; i < this->answers.size(); i++)
 	{
-		answers = std::to_string(i) + ": " + this->answers[i] + "\n";
+		answers += std::to_string(i) + ": " + this->answers[i] + "\n";
 	}
+
+	
+	//return this->question + "\n" + "\n" + this->answers + "\n";
 
 	return this->question + "\n" + "\n" + answers + "\n" + std::to_string(this->correctAnswers) + "\n";
 }

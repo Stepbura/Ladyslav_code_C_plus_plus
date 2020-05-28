@@ -35,6 +35,8 @@ public:
 	inline const double& getY() const { return this->yPos; }
 
 	//Modifier 
+	inline void setDistTravelled(const int& distance) { this->distanceTravelled = distance; }
+	inline void travel() { this->distanceTravelled++; }
 
 
 private:

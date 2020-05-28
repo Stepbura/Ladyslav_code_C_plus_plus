@@ -46,6 +46,11 @@ void Game::mainMenu()
 	case 0:
 		playing = false;
 		break;
+	case 1:
+		Travel();
+
+		break;
+
 
 	case 5:
 		characters[activeCharacter].printStats();
@@ -73,7 +78,7 @@ void Game::mainMenu()
 
 void Game::createNewCharacter()
 {
-	std::string name;
+	std::string name; 
 	cout << "Character name: ";
 	std::getline(std::cin, name);
 
@@ -105,5 +110,7 @@ void Game::saveCharacters()
 
 void Game::Travel()
 {
-
+	this->characters[activeCharacter].travel();
+	Event ev;
+	ev.generateEvent(this->characters[activeCharacter]); 
 }

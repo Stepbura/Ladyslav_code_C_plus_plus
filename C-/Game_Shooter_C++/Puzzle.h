@@ -17,6 +17,8 @@ public:
 	virtual ~Puzzle();
 	std::string getAsString();
 
+	const int& getCorrectAns() const { return this->correctAnswers; } 
+
 };
 
  
