@@ -43,30 +43,47 @@ void Event::puzzleEncounter(Character& character)
 	bool completed = false;
 	int usertAns = 0;
 	int chances = 3;
+	int gainExp = (chances * character.getLevel() * (rand() % 10 + 1)); 
 
-	Puzzle puzzle("D:\GIT\C-\Game_Shooter_C++\Puzzles\1.txt");
+	Puzzle puzzle("Puzzles/1.txt");
+
 
 	while (!completed && chances > 0) 
 	{
+		std::cout << "Chances: " << chances << "\n\n";
 		chances--;
-		puzzle.getAsString();
+		std::cout << puzzle.getAsString() << "\n";
 
 		std::cout << "\nYour ANSWER: " << std::endl;
 		std::cin >> usertAns;
-		std::cout << "\n";
+		
+		while (cin.fail())
+		{
+			cout << "Faulty input!" << "\n";
+			cin.clear();
+			cin.ignore(100, '\n');
 
+			cout << "\nYour ANSWER";
+			cin >> usertAns;
+		}
+
+		cin.ignore(100,'\n');
+		cout << "\n";
+
+		
 		if (puzzle.getCorrectAns() == usertAns)
 		{
 			completed = true;
-			//Give USER EXP ETC AND CONTINUE 
+			character.gainExp(gainExp); 
+			std::cout << "YOU GAINED " << gainExp << "EXP!" << "\n\n";
 		}
 	}
 	if (completed)
 	{
-		std::cout << "Gongratz you succeded! \n";
+		std::cout << "Gongratz you succeded! \n \n";
 	}
 	else
 	{
-		std::cout << "You have failed, bro! \n";
+		std::cout << "You have failed, bro! \n \n";
 	}
 }

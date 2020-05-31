@@ -16,6 +16,4 @@ public:
 	//Events
 	void enemyEncounter(Character& character);
 	void puzzleEncounter(Character& character);
-
-
 };

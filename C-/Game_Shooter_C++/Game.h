@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include "Event.h"
+#include <sstream>
 
 using namespace std;
 

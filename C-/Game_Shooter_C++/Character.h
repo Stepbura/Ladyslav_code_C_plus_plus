@@ -3,11 +3,17 @@
 #include "Inventory.h"
 #include "Enemy.h"
 
+
+using namespace std;
+
 class Character
 {
 
 public:
 	Character();
+	Character(string name, int distanceTravelled, int gold, int level, int exp,
+		int strength, int vitality, int dexterity, int intelligence, int hp, int stamina,
+		int statPoints, int skillPoints);
 	virtual ~Character();
 
 
@@ -16,6 +22,7 @@ public:
 	void initialize(const std::string name);
 	void printStats() const;
 	void leveleUp();
+	void updateStats();
 	std::string getAsSrting()const;
 
 	//Accessors
@@ -31,19 +38,16 @@ public:
 	inline const int& getDamageMax() const { return this->damageMax; }
 	inline const int& getDefence() const { return this->defence; }
 	inline const int& getAccuracy() const { return this->accuracy; }
-	inline const double& getX() const { return this->xPos; }
-	inline const double& getY() const { return this->yPos; }
-
+	
 	//Modifier 
 	inline void setDistTravelled(const int& distance) { this->distanceTravelled = distance; }
 	inline void travel() { this->distanceTravelled++; }
+	inline void gainExp(const int exp) { this->exp += exp;}
 
 
 private:
-	double xPos, yPos;
 
 	int distanceTravelled;
-
 
 	Inventory inventory;
 	Weapon weapon;
@@ -51,7 +55,6 @@ private:
 	Armor armor_chest;
 	Armor armor_arms;
 	Armor armor_legs;
-
 
 	int gold;
 	std::string name;
@@ -74,6 +77,6 @@ private:
 	int accuracy;
 	int luck;
 
-	int startPoints;
+	int statPoints;
 	int skillPoints;
 };
