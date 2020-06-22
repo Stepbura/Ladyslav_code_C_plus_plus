@@ -17,7 +17,6 @@ public:
 
 	virtual Armor* clone() const;
 
-
 	//Functions
 
 	std::string toString();

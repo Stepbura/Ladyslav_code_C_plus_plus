@@ -23,6 +23,7 @@ public:
 	void printStats() const;
 	void leveleUp();
 	void updateStats();
+	void addToStat(int stat, int value);
 	std::string getAsSrting()const;
 
 	//Accessors
@@ -31,19 +32,22 @@ public:
 	inline const int& getLevel() const { return this->level; }
 	inline const int& getExp() const { return this->exp; }
 	inline const int& getExpNext() const { return this->expNext; }
+	inline const int& getStatpoints() const { return this->statPoints; }
 	inline const int& getHP() const { return this->hp; }
 	inline const int& getHPMax() const { return this->hpMax; }
+	inline const bool isAlive() { return this->hp > 0;}
 	inline const int& getStamina() const { return this->stamina; }
 	inline const int& getDamageMin() const { return this->damageMin; }
 	inline const int& getDamageMax() const { return this->damageMax; }
 	inline const int& getDefence() const { return this->defence; }
 	inline const int& getAccuracy() const { return this->accuracy; }
 	
+
 	//Modifier 
 	inline void setDistTravelled(const int& distance) { this->distanceTravelled = distance; }
 	inline void travel() { this->distanceTravelled++; }
 	inline void gainExp(const int exp) { this->exp += exp;}
-
+	void takeDamage(const int damage);
 
 private:
 

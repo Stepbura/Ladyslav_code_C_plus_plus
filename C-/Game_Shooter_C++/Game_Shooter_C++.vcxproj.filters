@@ -77,5 +77,8 @@
     <ClInclude Include="Puzzle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dArr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

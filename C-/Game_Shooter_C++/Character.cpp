@@ -137,6 +137,8 @@ void Character::leveleUp()
 		this->statPoints++;
 		this->skillPoints++;
 
+		this->updateStats();
+
 		cout << "YOU ARE GETTING NEW LEVEL!  "<<this->level << "\n\n";
 	}
 	else
@@ -177,4 +179,54 @@ void Character::updateStats()
 	this->defence = this->dexterity + (this->intelligence / 2);
 	this->accuracy = this->dexterity / 2;
 	this->luck = this->intelligence;
+}
+
+
+void Character::addToStat(int stat, int value)
+{
+	if (this->statPoints < value)
+	{
+		cout << "NOT ENOUGH STATPOINTS!" << "\n";
+	}
+	else
+	{
+		switch (stat)
+		{
+		case 0:
+			this->strength += value;
+			cout << "STRENGTH INCREASED! " << "\n";
+			break;
+
+		case 1:
+			this->vitality += value;
+			cout << "VITALITY INCREASED! " << "\n";
+			break;
+
+		case 2:
+			this->dexterity += value;
+			cout << "DEXTERITY INCREASED! " << "\n";
+			break;
+
+		case 3:
+			this->intelligence += value;
+			cout << "INTELLIGENCE INCREASED! " << "\n";
+			break;
+
+		default:
+			cout << "NO SUCH STAT! " << "\n";
+			break;
+		}
+		this->statPoints -= value;
+	}
+ }
+
+void Character::takeDamage(const int damage)
+{
+	this->hp -= damage;
+	if (this->hp < 0)
+	{
+		this->hp = 0;
+
+
+	}
 }
