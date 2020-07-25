@@ -150,7 +150,7 @@ void dArr<T>::remove(const unsigned index, bool ordered)
 
 		for (size_t i = 0; i < this->nrOfEl - 1; i++)
 		{
-			this->arr[i] = this - arr[i + 1];
+			this->arr[i] = this->arr[i + 1];
 		}
 
 		this->arr[--this->nrOfEl] = nullptr;

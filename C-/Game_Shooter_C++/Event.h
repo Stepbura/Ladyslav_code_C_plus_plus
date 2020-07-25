@@ -4,6 +4,8 @@
 #include "Character.h"
 #include "dArr.h"
 
+using namespace std;
+
 class Event
 {
 private:

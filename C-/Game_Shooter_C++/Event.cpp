@@ -49,17 +49,24 @@ void Event::enemyEncounter(Character& character, dArr<Enemy>& enemies)
 	else
 		playerTurn = false;
 
+	//End conditions
 	bool escape = false;
 	bool playerDefeated = false;
 	bool enemiesDefeated = false;
 
-
-	int nrOfEnemies = rand() % 5;
+	//enemies 
+	int nrOfEnemies = rand() % 5 + 1;
 
 	for (size_t i = 0; i < nrOfEnemies; i++)
 	{
 		enemies.push(Enemy(character.getLevel()));
 	}
+
+	//Battle variables 
+	int attackRoll = 0;
+	int defendRoll = 0;
+	int damage = 0;
+	int gainExp = 0;
 
 
 	while (!escape && !playerDefeated && !enemiesDefeated)
@@ -67,7 +74,7 @@ void Event::enemyEncounter(Character& character, dArr<Enemy>& enemies)
 		if (playerTurn && !playerDefeated)
 		{
 			//Menu
-			system("cls");
+			//system("cls");
 			cout << "= BATTLE MENU =" << "\n\n";
 
 			cout << "0: Escape" << "\n";
@@ -103,15 +110,72 @@ void Event::enemyEncounter(Character& character, dArr<Enemy>& enemies)
 
 			switch (choice)
 			{
-			case 0:
+			case 0: //Escape
 				escape = true;
 				break;
 
-			case 1:
+			case 1: //Attack
+
+				//Select enemy
+				cout << "= Select Enemy" << "\n\n";
+
+				for (size_t i = 0; i < enemies.size(); i++)
+				{
+					cout << i << ": " << "Level: " << enemies[i].getLevel() << "-" << "HP: " << enemies[i].getHp()
+						<< "/" << enemies[i].getHpMax() << "\n";
+				}
+
+				cout << "\n";
+				cout << "Choice: ";
+
+				cin >> choice;
+
+				while (cin.fail() || choice >= enemies.size() || choice < 0)
+				{
+					cout << "Faulty input" << "\n";
+					cin.clear();
+					cin.ignore(100, '\n');
+
+
+					cout << "= Select Enemy" << "\n\n";
+					cout << "Choice: ";
+					cin >> choice;;
+				}
+
+				cin.ignore(100, '\n');
+				cout << "\n";
+				attackRoll = rand() % 100 + 1;
+
+				if (attackRoll > 50) //Hit
+				{
+					cout << "HIT! " << "\n\n";
+					damage = character.getDamage();
+					enemies[choice].takeDamage(damage);
+
+					cout << "Damage: " << damage << "!" << "\n\n";
+
+					if (!enemies[choice].isAlive())
+					{
+						cout << "Enemy Defeated! " << "\n\n";
+						gainExp = enemies[choice].getExp();
+						character.gainExp(gainExp);
+						cout << "EXP GAINED: " << gainExp << "\n\n";
+						enemies.remove(choice);
+					}
+				}
+				else //Miss
+				{
+					cout << "Miss!" << "\n\n";
+				}
+				
 				break;
-			case 2:
+
+			case 2: //Defend
+
 				break;
-			case 3:
+
+			case 3: //Item
+
 				break;
 
 			default:
