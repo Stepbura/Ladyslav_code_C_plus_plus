@@ -20,12 +20,12 @@ private:
     static ContactListProvider* p_instance;
     ContactListProvider(QObject* parent = nullptr) : QObject(parent)
     {
-        AddContact("Maksym", "Bezuhlyi", 380960556);
+        AddContact("Maksym", "Belikov", 380960556);
         AddContact("Vladyslav", "Ischenko", 546565464);
-        AddContact("Ekateryna", "Ohbaidze", 5676565);
-        AddContact("Anna", "Pereschkura", 345433);
-        AddContact("Aleksandra", "Neklesa", 56565);
-        AddContact("Olya", "Anal", 56565);
+        AddContact("Ekateryna", "Yavtushenko", 5676565);
+        AddContact("Anna", "Zaira", 345433);
+        AddContact("Aleksandra", "Stretovich", 56565);
+        AddContact("Olya", "Onisenko", 56565);
     };
     ContactListProvider(const ContactListProvider& obj) = delete;
     ContactListProvider(const ContactListProvider&& obj) = delete;
