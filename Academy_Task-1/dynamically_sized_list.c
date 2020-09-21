@@ -1,7 +1,8 @@
 #include "dynamically_sized_list.h"
 
-enum { value, next };
 
+
+//Function for initializing list
 void StringListInit(char*** list, char* str, _Bool* memoryIsAllocated)
 {
 	if (*memoryIsAllocated == 1)
@@ -10,13 +11,17 @@ void StringListInit(char*** list, char* str, _Bool* memoryIsAllocated)
 		return;
 	}
 
+	//Allocating of memory for first element(head)
+
 	*list = (char**)malloc(2 * sizeof(char*));
 	size_t lengthOfString = strlen(str) + 1;
 	*list[value] = (char*)malloc(sizeof(char) * lengthOfString);
 	memcpy((*list)[value], str, lengthOfString);
 	(*list)[next] = NULL;
+	(*memoryIsAllocated) = 1;
 }
 
+//Adding new element to the end of list
 void StringListAdd(char*** list, char* str)
 {
 	if (*list == NULL)
@@ -27,6 +32,8 @@ void StringListAdd(char*** list, char* str)
 	{
 		present = present[1];
 	}
+
+	//Creating an new element and uniteing last element in list wiht new element
 
 	char** new_chain = (char**)malloc(sizeof(char*) * 2);
 
@@ -40,6 +47,7 @@ void StringListAdd(char*** list, char* str)
 	present = present[next];
 }
 
+//Destroying of list
 void StringListDestroy(char*** list)
 {
 	if (!list)
@@ -48,6 +56,8 @@ void StringListDestroy(char*** list)
 	}
 
 	char** tmp = NULL;
+
+	//Deleting elements from the beginning 
 
 	while ((*list)[next])
 	{
@@ -62,6 +72,7 @@ void StringListDestroy(char*** list)
 	puts("List was destroyed\n");
 }
 
+//Showing all strings from list
 void PrintAllStrings(const char** list)
 {
 	if (!list)
@@ -74,6 +85,7 @@ void PrintAllStrings(const char** list)
 	}
 }
 
+//Deleting of some element in list
 void StringListRemove(char*** list, char* str)
 {
 	if (list == NULL)
@@ -86,10 +98,12 @@ void StringListRemove(char*** list, char* str)
 
 	while (present != NULL)
 	{
+		//Looking for element that we want to find and delete 
 		if (!strcmp(present[value], str))
 		{
 			if (prev)
 			{
+				//Deleting of data and keeping pointer between elements 
 				prev[next] = present[next];
 				free(present[value]);
 				free(present);
@@ -107,36 +121,37 @@ void StringListRemove(char*** list, char* str)
 	}
 }
 
+//Sorting of elements in list
 void StringListSort(char*** list) {
 
-	char** str1 = NULL
-		, ** str2 = NULL;
-	str1 = *list;
+	char** first_str = NULL;
+	char** second_str = NULL;
 
-	while (str1 != NULL)
+	first_str = *list;
+
+	while (first_str != NULL)
 	{
-		str2 = str1[next];
-		/* Compare the picked element with rest of the elements */
-		while (str2 != NULL)
+		second_str = first_str[next];
+		//Whats required, is compare this element with others
+		while (second_str != NULL)
 		{
-			/* If duplicate then delete it */
-			if (0 < strcmp(str1[value], str2[value]))
+			if (0 < strcmp(first_str[value], second_str[value]))
 			{
-				/* sequence of steps is important here */
-				char** temp = str1[value];
-				str1[value] = str2[value];
-				str2[value] = temp;
+				char** temp = first_str[value];
+				first_str[value] = second_str[value];
+				second_str[value] = temp;
 
 			}
-			else /* This is tricky */
+			else 
 			{
-				str2 = str2[next];
+				second_str = second_str[next];
 			}
 		}
-		str1 = str1[next];
+		first_str = first_str[next];
 	}
 }
 
+//Removes duplicate entries from the list
 void StringListRemoveDuplicates(char*** list)
 {
 	if (!list)
@@ -173,24 +188,25 @@ void StringListRemoveDuplicates(char*** list)
 
 }
 
+//Replaces every occurrence of the before, in each of the string lists's strings, with after
 void StringListReplaceInStrings(char*** list, char* before, char* after)
 {
+	char** present = (*list);
 
-	char** curr = (*list);
-
-	while (curr != NULL)
+	while (present != NULL)
 	{
-		if (!strcmp(curr[value], before))
+		if (!strcmp(present[value], before))
 		{
 			char* tmp = (char*)malloc(sizeof(char) * (strlen(after) + 1));
 			strcpy(tmp, after);
-			free(curr[value]);
-			curr[value] = tmp;
+			free(present[value]);
+			present[value] = tmp;
 		}
-		curr = (char*)curr[next];
+		present = (char*)present[next];
 	}
 }
 
+//Inserts value at the end of the list
 int StringListSize(char** list)
 {
 	int sizeOfList = 0;
@@ -202,6 +218,7 @@ int StringListSize(char** list)
 	return sizeOfList;
 }
 
+//Returns the index position of the first occurrence of str in the list
 int StringListIndexOf(char*** list, char* str) {
 
 	char** curr = (*list);
@@ -217,46 +234,6 @@ int StringListIndexOf(char*** list, char* str) {
 		curr = (char*)curr[next];
 	}
 	return -1;
-}
-
-
-int main()
-{
-	char** list = NULL;
-	char* tmp1 = "String-5";
-	char* tmp2 = "String-4";
-	char* tmp3 = "String-3";
-	char* tmp4 = "String-2";
-	char* tmp5 = "String-2";
-	_Bool move = 0;
-
-	StringListInit(&list, tmp1, &move);
-	StringListAdd(&list, tmp2);
-	StringListAdd(&list, tmp3);
-	StringListAdd(&list, tmp4);
-	StringListAdd(&list, tmp5);
-	PrintAllStrings(list);
-	printf("\n");
-
-	StringListRemoveDuplicates(&list);
-	PrintAllStrings(list);
-	printf("\n");
-
-	StringListSort(&list);
-	PrintAllStrings(list);
-	printf("\n");
-
-	StringListRemove(&list, tmp1);
-	PrintAllStrings(list);
-	printf("\n");
-
-	StringListReplaceInStrings(&list, "S", "K");
-	PrintAllStrings(list);
-	printf("\n");
-
-	StringListDestroy(&list);
-
-	return 0;
 }
 
 

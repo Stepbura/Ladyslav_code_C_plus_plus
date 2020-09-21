@@ -7,6 +7,8 @@
 #include "string.h"
 #include "stdio.h"
 
+enum { value, next };
+
 void StringListInit(char*** list, char* str, _Bool* memoryIsAllocated);
 void StringListAdd(char*** list, char* str);
 void StringListDestroy(char*** list);
