@@ -1,6 +1,7 @@
 
 #include "dynamically_sized_list.h"
 
+
 int main()
 {
 	char** list = NULL;
