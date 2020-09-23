@@ -191,6 +191,7 @@ void StringListRemoveDuplicates(char*** list)
 //Replaces every occurrence of the before, in each of the string lists's strings, with after
 void StringListReplaceInStrings(char*** list, char* before, char* after)
 {
+	/*
 	char** present = (*list);
 
 	while (present != NULL)
@@ -204,6 +205,56 @@ void StringListReplaceInStrings(char*** list, char* before, char* after)
 		}
 		present = (char*)present[next];
 	}
+	*/
+
+	if (before == NULL || !strcmp(before,""))
+		return;
+
+
+	char** curr = (*list);
+
+	while (curr != NULL)
+	{
+		char* tmp = strstr(curr[value], before);
+
+		if (tmp != NULL)
+		{
+			size_t newStrLen = (strlen(curr[value]) - strlen(before) + strlen(after) + 1);
+			
+			if (newStrLen != strlen(curr[value]) + 1)
+			{
+				char* newStr = (char*)malloc(sizeof(char) * newStrLen);
+
+				size_t numOfSymbolsBefore = 0;
+
+				for (char* i = curr[value]; i != tmp; ++i, ++numOfSymbolsBefore);
+
+				if (numOfSymbolsBefore != 0)
+					strcpy_s(newStr, newStrLen, curr[value], numOfSymbolsBefore);
+
+				strcpy_s(&newStr[numOfSymbolsBefore], newStrLen - numOfSymbolsBefore, after, strlen(after));
+
+
+				char* lastPartOfStr = curr[value] + numOfSymbolsBefore + strlen(before);
+				size_t sizeOfLastPartOfStr = strlen(lastPartOfStr);
+
+				strcpy_s(&newStr[numOfSymbolsBefore + strlen(after)], newStrLen - (numOfSymbolsBefore + strlen(after)), lastPartOfStr, sizeOfLastPartOfStr);
+				int lastIndex = numOfSymbolsBefore + strlen(after) + sizeOfLastPartOfStr;
+				newStr[lastIndex] = '\0';
+
+				free(curr[value]);
+				curr[value] = newStr;
+			}
+			else
+			{
+				for (int i = 0; i < strlen(after); ++i)
+					tmp[i] = after[i];
+			}
+		}
+
+		curr = curr[next];
+	}
+
 }
 
 //Inserts value at the end of the list
