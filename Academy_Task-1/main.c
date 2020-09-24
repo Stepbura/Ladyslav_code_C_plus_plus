@@ -21,7 +21,7 @@ int main()
 	PrintAllStrings(list);
 	printf("\n");
 
-	//StringListRemoveDuplicates(&list);
+	StringListRemoveDuplicates(&list);
 	PrintAllStrings(list);
 	printf("\n");
 
@@ -29,11 +29,11 @@ int main()
 	PrintAllStrings(list);
 	printf("\n");
 
-	//StringListRemove(&list, tmp1);
+	StringListRemove(&list, tmp1);
 	PrintAllStrings(list);
 	printf("\n");
 
-	StringListReplaceInStrings(&list, "String-2", "");
+	StringListReplaceInStrings(&list, "String-2", "123345");
 	PrintAllStrings(list);
     printf("\n");
 

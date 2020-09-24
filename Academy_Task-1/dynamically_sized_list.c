@@ -7,7 +7,7 @@ void StringListInit(char*** list, char* str, _Bool* memoryIsAllocated)
 {
 	if (*memoryIsAllocated == 1)
 	{
-		printf("\nError. Init has already done.\n");
+		printf("\n Error.Init has already done.\n");
 		return;
 	}
 
@@ -191,25 +191,9 @@ void StringListRemoveDuplicates(char*** list)
 //Replaces every occurrence of the before, in each of the string lists's strings, with after
 void StringListReplaceInStrings(char*** list, char* before, char* after)
 {
-	/*
-	char** present = (*list);
-
-	while (present != NULL)
-	{
-		if (!strcmp(present[value], before))
-		{
-			char* tmp = (char*)malloc(sizeof(char) * (strlen(after) + 1));
-			strcpy(tmp, after);
-			free(present[value]);
-			present[value] = tmp;
-		}
-		present = (char*)present[next];
-	}
-	*/
 
 	if (before == NULL || !strcmp(before,""))
 		return;
-
 
 	char** curr = (*list);
 
@@ -271,6 +255,9 @@ int StringListSize(char** list)
 
 //Returns the index position of the first occurrence of str in the list
 int StringListIndexOf(char*** list, char* str) {
+	
+	if (*list == NULL)
+		return;
 
 	char** curr = (*list);
 	int position = 0;
@@ -282,7 +269,7 @@ int StringListIndexOf(char*** list, char* str) {
 			return position;
 		}
 		position++;
-		curr = (char*)curr[next];
+		curr = curr[next];
 	}
 	return -1;
 }
