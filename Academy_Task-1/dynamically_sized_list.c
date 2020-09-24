@@ -90,7 +90,7 @@ void StringListRemove(char*** list, char* str)
 {
 	if (list == NULL)
 		return;
-	if (str == NULL)
+	if (str == NULL || !strcmp(str, ""))
 		return;
 
 	char** prev = NULL;
