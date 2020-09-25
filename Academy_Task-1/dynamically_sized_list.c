@@ -276,4 +276,8 @@ int StringListIndexOf(char*** list, char* str) {
 
 
 
-
+// What is _Bool type?
+// Line 25: void StringListAdd(char*** list, char* str). It needs to verify if str == NULL, It does not need to add an epmty string.
+// Line 47: The 'present' variable is assigned but is not used. I am not sure if list contains just added string.
+// Line 172: Dereferencing of the null pointer 'prev' might take place.
+// Line 198: Line 130: Line: 248: First verify input parameter 'list' and then assign it.
